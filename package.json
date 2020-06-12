@@ -38,5 +38,13 @@
   },
   "dependencies": {
     "babel-plugin-transform-async-to-promises": "^0.8.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaoxiaojx/source-map-to-code"
+  },
+  "homepage": "https://github.com/xiaoxiaojx/source-map-to-code#readme",
+  "bugs": {
+    "url": "https://github.com/xiaoxiaojx/source-map-to-code/issues"
   }
 }
