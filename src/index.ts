@@ -64,7 +64,7 @@ async function getSourceCodeInfo(
       return null;
     }
 
-    consumer.destroy();
+    // consumer.destroy();
     return {
       sources: getSources({ ...originalPosition, source }),
       position: {
