@@ -27,9 +27,10 @@ interface ISource {
 interface IGetSourcesResult {
   sources: ISource[];
   position: Position;
+  filePath: string;
 }
 
-type ILogger = (message: string) => void;
+type ILogger = (message?: string) => void;
 
 async function getSourceCodeInfo(
   options: IGetSourceCodeInfoOptions
@@ -71,6 +72,7 @@ async function getSourceCodeInfo(
         line: originalPosition.line,
         column: originalPosition.column,
       },
+      filePath: originalPosition.source,
     };
   } catch (err) {}
   return null;
@@ -82,14 +84,20 @@ async function printSourceCodeInfo(
 ) {
   const info = await getSourceCodeInfo(options);
   if (info !== null) {
-    const { sources, position } = info;
+    const { sources, position, filePath } = info;
+    logger();
+    logger("Source code file path:");
+    logger(`  ${filePath}`)
+    logger();
+    logger("Source code snippets:");
     sources.forEach((source) => {
-      let message: string = `${source.line}  ${source.source}`;
+      let message: string = `  ${source.line}  ${source.source}`;
       if (position.line === source.line) {
         message += `   <------ Error(${position.line}:${position.column})`;
       }
       logger(message);
     });
+    logger();
   }
 }
 
